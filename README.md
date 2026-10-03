@@ -171,5 +171,3 @@ An array provides direct access to each descriptor's state and keeps the reading
 
 AI was used to inspect the repository and prepare this README, including the compilation commands, usage example, and explanation and justification of the implemented algorithm. This documentation task did not modify the project's C source files.
 
-This statement covers the assistance used to prepare this README. Any AI assistance used elsewhere during development should also be documented here before submission.
-
