@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: salegari <salegari@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 19:33:47 by salegari          #+#    #+#             */
-/*   Updated: 2026/10/03 18:10:30 by salegari         ###   ########.fr       */
+/*   Updated: 2026/10/03 18:12:40 by salegari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <unistd.h>
 
 char	*ft_substr(char *s, unsigned int start, size_t len)
@@ -101,26 +101,26 @@ char	*ft_concat(int fd, char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
+	static char	*line[MAX_FD];
 	char		*res;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	line = ft_concat(fd, line);
-	if (!line || line[0] == '\0')
+	line[fd] = ft_concat(fd, line[fd]);
+	if (!line[fd] || line[fd][0] == '\0')
 	{
-		free(line);
-		line = NULL;
+		free(line[fd]);
+		line[fd] = NULL;
 		return (NULL);
 	}
-	res = ft_extract(line, 0);
+	res = ft_extract(line[fd], 0);
 	if (!res)
 	{
-		free(line);
-		line = NULL;
+		free(line[fd]);
+		line[fd] = NULL;
 		return (NULL);
 	}
-	line = ft_extract(line, 1);
+	line[fd] = ft_extract(line[fd], 1);
 	return (res);
 }
 
